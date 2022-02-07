@@ -7,6 +7,54 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WixSharp.WinForm", "WixShar
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WixSharp.WPF", "WixSharp.WPF\WixSharp.WPF.csproj", "{900767BB-0585-4BC3-A584-CF2C3D571316}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Localizations", "Localizations", "{D372BD2B-3177-4F03-993F-10F5702E2BB3}"
+	ProjectSection(SolutionItems) = preProject
+		Localizations\WixUI_Advanced.wxs = Localizations\WixUI_Advanced.wxs
+		Localizations\WixUI_ar-SA.wxl = Localizations\WixUI_ar-SA.wxl
+		Localizations\WixUI_bg-BG.wxl = Localizations\WixUI_bg-BG.wxl
+		Localizations\WixUI_ca-ES.wxl = Localizations\WixUI_ca-ES.wxl
+		Localizations\WixUI_cs-CZ.wxl = Localizations\WixUI_cs-CZ.wxl
+		Localizations\WixUI_da-DK.wxl = Localizations\WixUI_da-DK.wxl
+		Localizations\WixUI_de-de.wxl = Localizations\WixUI_de-de.wxl
+		Localizations\WixUI_el-GR.wxl = Localizations\WixUI_el-GR.wxl
+		Localizations\WixUI_en-us.wxl = Localizations\WixUI_en-us.wxl
+		Localizations\WixUI_es-es.wxl = Localizations\WixUI_es-es.wxl
+		Localizations\WixUI_et-EE.wxl = Localizations\WixUI_et-EE.wxl
+		Localizations\WixUI_FeatureTree.wxs = Localizations\WixUI_FeatureTree.wxs
+		Localizations\WixUI_fi-FI.wxl = Localizations\WixUI_fi-FI.wxl
+		Localizations\WixUI_fr-fr.wxl = Localizations\WixUI_fr-fr.wxl
+		Localizations\WixUI_he-IL.wxl = Localizations\WixUI_he-IL.wxl
+		Localizations\WixUI_hi-IN.wxl = Localizations\WixUI_hi-IN.wxl
+		Localizations\WixUI_hr-HR.wxl = Localizations\WixUI_hr-HR.wxl
+		Localizations\WixUI_hu-HU.wxl = Localizations\WixUI_hu-HU.wxl
+		Localizations\WixUI_InstallDir.wxs = Localizations\WixUI_InstallDir.wxs
+		Localizations\WixUI_it-it.wxl = Localizations\WixUI_it-it.wxl
+		Localizations\WixUI_ja-jp.wxl = Localizations\WixUI_ja-jp.wxl
+		Localizations\WixUI_kk-KZ.wxl = Localizations\WixUI_kk-KZ.wxl
+		Localizations\WixUI_ko-KR.wxl = Localizations\WixUI_ko-KR.wxl
+		Localizations\WixUI_lt-LT.wxl = Localizations\WixUI_lt-LT.wxl
+		Localizations\WixUI_lv-LV.wxl = Localizations\WixUI_lv-LV.wxl
+		Localizations\WixUI_Minimal.wxs = Localizations\WixUI_Minimal.wxs
+		Localizations\WixUI_Mondo.wxs = Localizations\WixUI_Mondo.wxs
+		Localizations\WixUI_nb-NO.wxl = Localizations\WixUI_nb-NO.wxl
+		Localizations\WixUI_nl-NL.wxl = Localizations\WixUI_nl-NL.wxl
+		Localizations\WixUI_pl-pl.wxl = Localizations\WixUI_pl-pl.wxl
+		Localizations\WixUI_pt-BR.wxl = Localizations\WixUI_pt-BR.wxl
+		Localizations\WixUI_pt-PT.wxl = Localizations\WixUI_pt-PT.wxl
+		Localizations\WixUI_ro-RO.wxl = Localizations\WixUI_ro-RO.wxl
+		Localizations\WixUI_ru-ru.wxl = Localizations\WixUI_ru-ru.wxl
+		Localizations\WixUI_sk-SK.wxl = Localizations\WixUI_sk-SK.wxl
+		Localizations\WixUI_sl-SI.wxl = Localizations\WixUI_sl-SI.wxl
+		Localizations\WixUI_sr-Latn-CS.wxl = Localizations\WixUI_sr-Latn-CS.wxl
+		Localizations\WixUI_sv-SE.wxl = Localizations\WixUI_sv-SE.wxl
+		Localizations\WixUI_th-TH.wxl = Localizations\WixUI_th-TH.wxl
+		Localizations\WixUI_tr-TR.wxl = Localizations\WixUI_tr-TR.wxl
+		Localizations\WixUI_uk-UA.wxl = Localizations\WixUI_uk-UA.wxl
+		Localizations\WixUI_zh-CN.wxl = Localizations\WixUI_zh-CN.wxl
+		Localizations\WixUI_zh-HK.wxl = Localizations\WixUI_zh-HK.wxl
+		Localizations\WixUI_zh-TW.wxl = Localizations\WixUI_zh-TW.wxl
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
