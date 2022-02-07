@@ -1,0 +1,27 @@
+﻿{
+  "Version": "0.0.1-preview",
+  "GUID": "38FAECC0-D6EF-496E-B551-A21DD7DCDCC3",
+  "Manufacturer": "My Company",
+  "InstallerName": "WixSharp",
+  "ServiceName": "WixSharp",
+  "LicenseFilePath": "../License/ja-jp.rtf",
+  "UseService": true,
+  "UseRunningAsAdministrator": true,
+  "SupportLanguages": [
+    {
+      "Id": "ko-KR",
+      "DisplayName": "Korean",
+      "WxlFilePath": "../Localizations/WixUI_ko-KR.wxl"
+    },
+    {
+      "Id": "en-US",
+      "DisplayName": "English",
+      "WxlFilePath": "../Localizations/WixUI_en-us.wxl"
+    },
+    {
+      "Id": "ja-JP",
+      "DisplayName": "Japan",
+      "WxlFilePath": "../Localizations/WixUI_ja-jp.wxl"
+    }
+  ]
+}

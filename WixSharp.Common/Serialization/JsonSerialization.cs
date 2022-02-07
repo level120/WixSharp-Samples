@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.IO;
+using Newtonsoft.Json;
 
 namespace WixSharp.Common.Serialization;
 
@@ -21,6 +22,26 @@ public sealed class JsonSerialization
         catch
         {
             serialized = default;
+            return false;
+        }
+    }
+
+    public static T? DeserializeFrom<T>(string filepath, params JsonConverter[] converters)
+    {
+        return JsonConvert.DeserializeObject<T>(File.ReadAllText(filepath), converters);
+    }
+
+    public static bool TryDeserializeFrom<T>(
+        string filepath, out T? deserialized, params JsonConverter[] converters)
+    {
+        try
+        {
+            deserialized = DeserializeFrom<T>(filepath, converters);
+            return true;
+        }
+        catch
+        {
+            deserialized = default;
             return false;
         }
     }

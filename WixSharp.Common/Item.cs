@@ -10,4 +10,7 @@ public sealed class Item
 
     [JsonRequired, JsonProperty]
     public string Destination { get; set; } = string.Empty;
+
+    [JsonProperty]
+    public string? SearchType { get; set; }
 }

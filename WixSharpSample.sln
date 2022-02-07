@@ -50,12 +50,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Localizations", "Localizati
 		Localizations\WixUI_zh-TW.wxl = Localizations\WixUI_zh-TW.wxl
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WixSharp.Common", "WixSharp.Common\WixSharp.Common.csproj", "{8060D7AC-F7B7-4EDE-A84F-678B74C3B082}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WixSharp.Common", "WixSharp.Common\WixSharp.Common.csproj", "{8060D7AC-F7B7-4EDE-A84F-678B74C3B082}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{C447D750-1D09-415F-8AFD-5BDCBC82133B}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
 		Readme.md = Readme.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "License", "License", "{0153C70B-B5B0-4BEB-9A4D-888ACDD0D194}"
+	ProjectSection(SolutionItems) = preProject
+		License\en-us.rtf = License\en-us.rtf
+		License\ja-jp.rtf = License\ja-jp.rtf
+		License\ko-KR.rtf = License\ko-KR.rtf
 	EndProjectSection
 EndProject
 Global
