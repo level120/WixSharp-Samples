@@ -14,10 +14,11 @@
 
 * [string] Version
 * [string] GUID
+* [string] Manufacturer
 * [string] MSI file name(i.e `MSIFileName`)
 * [string] Background image path
 * [string] Banner image path
 * [boolean] Use running administrator
-* [dictionary] Support locals file and license.rtf path(i.e `LocalizationFile`, `Language`, `LicenceFile`)
+* [dictionary] Support locals file and license.rtf path(i.e `LocalizationFile`, `Language`, `LicenseFile`)
 * [dictionary] Mapping directories and files
 * [dictionary] Mapping registries
