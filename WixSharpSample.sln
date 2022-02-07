@@ -9,7 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WixSharp.WPF", "WixSharp.WP
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Localizations", "Localizations", "{D372BD2B-3177-4F03-993F-10F5702E2BB3}"
 	ProjectSection(SolutionItems) = preProject
-		Localizations\WixUI_Advanced.wxs = Localizations\WixUI_Advanced.wxs
 		Localizations\WixUI_ar-SA.wxl = Localizations\WixUI_ar-SA.wxl
 		Localizations\WixUI_bg-BG.wxl = Localizations\WixUI_bg-BG.wxl
 		Localizations\WixUI_ca-ES.wxl = Localizations\WixUI_ca-ES.wxl
@@ -20,22 +19,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Localizations", "Localizati
 		Localizations\WixUI_en-us.wxl = Localizations\WixUI_en-us.wxl
 		Localizations\WixUI_es-es.wxl = Localizations\WixUI_es-es.wxl
 		Localizations\WixUI_et-EE.wxl = Localizations\WixUI_et-EE.wxl
-		Localizations\WixUI_FeatureTree.wxs = Localizations\WixUI_FeatureTree.wxs
 		Localizations\WixUI_fi-FI.wxl = Localizations\WixUI_fi-FI.wxl
 		Localizations\WixUI_fr-fr.wxl = Localizations\WixUI_fr-fr.wxl
 		Localizations\WixUI_he-IL.wxl = Localizations\WixUI_he-IL.wxl
 		Localizations\WixUI_hi-IN.wxl = Localizations\WixUI_hi-IN.wxl
 		Localizations\WixUI_hr-HR.wxl = Localizations\WixUI_hr-HR.wxl
 		Localizations\WixUI_hu-HU.wxl = Localizations\WixUI_hu-HU.wxl
-		Localizations\WixUI_InstallDir.wxs = Localizations\WixUI_InstallDir.wxs
 		Localizations\WixUI_it-it.wxl = Localizations\WixUI_it-it.wxl
 		Localizations\WixUI_ja-jp.wxl = Localizations\WixUI_ja-jp.wxl
 		Localizations\WixUI_kk-KZ.wxl = Localizations\WixUI_kk-KZ.wxl
 		Localizations\WixUI_ko-KR.wxl = Localizations\WixUI_ko-KR.wxl
 		Localizations\WixUI_lt-LT.wxl = Localizations\WixUI_lt-LT.wxl
 		Localizations\WixUI_lv-LV.wxl = Localizations\WixUI_lv-LV.wxl
-		Localizations\WixUI_Minimal.wxs = Localizations\WixUI_Minimal.wxs
-		Localizations\WixUI_Mondo.wxs = Localizations\WixUI_Mondo.wxs
 		Localizations\WixUI_nb-NO.wxl = Localizations\WixUI_nb-NO.wxl
 		Localizations\WixUI_nl-NL.wxl = Localizations\WixUI_nl-NL.wxl
 		Localizations\WixUI_pl-pl.wxl = Localizations\WixUI_pl-pl.wxl
@@ -55,6 +50,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Localizations", "Localizati
 		Localizations\WixUI_zh-TW.wxl = Localizations\WixUI_zh-TW.wxl
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WixSharp.Common", "WixSharp.Common\WixSharp.Common.csproj", "{8060D7AC-F7B7-4EDE-A84F-678B74C3B082}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{C447D750-1D09-415F-8AFD-5BDCBC82133B}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		Readme.md = Readme.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +72,10 @@ Global
 		{900767BB-0585-4BC3-A584-CF2C3D571316}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{900767BB-0585-4BC3-A584-CF2C3D571316}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{900767BB-0585-4BC3-A584-CF2C3D571316}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8060D7AC-F7B7-4EDE-A84F-678B74C3B082}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8060D7AC-F7B7-4EDE-A84F-678B74C3B082}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8060D7AC-F7B7-4EDE-A84F-678B74C3B082}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8060D7AC-F7B7-4EDE-A84F-678B74C3B082}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
