@@ -9,7 +9,7 @@ public sealed class Item
     [JsonRequired, JsonProperty]
     public string Source { get; set; } = string.Empty;
 
-    [JsonProperty]
+    [JsonRequired, JsonProperty]
     public string? Destination { get; set; }
 
     [JsonProperty]

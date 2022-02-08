@@ -26,20 +26,20 @@
   ],
   "MappingItems": [
     {
-      "Source": "specification.json",
       "Destination": "%ProgramFiles%/WixSharp-Sample",
+      "Source": "specification.json",
       "MappingItems": [
         {
-          "Source": "../Localizations/*.*",
-          "Destination": "Localizations"
+          "Destination": "Localizations",
+          "Source": "../Localizations/*.*"
         },
         {
-          "Source": "../License/*.*",
-          "Destination": "License"
+          "Destination": "License",
+          "Source": "../License/*.*"
         },
         {
-          "Source": "../*.*",
           "Destination": "Common",
+          "Source": "../*.*",
           "ExcludeType": ".gitignore"
         }
       ]
