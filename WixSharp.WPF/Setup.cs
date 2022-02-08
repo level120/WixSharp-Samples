@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Reflection;
 using WixSharp.Common;
 using WixSharp.Common.Serialization;
 using WixSharp.CommonTasks;
@@ -54,49 +56,31 @@ namespace WixSharp.WPF
             };
 
             project
-                .SetLicense(specification.LicenseFilePath)
-                .SetIcon(specification.IconPath)
-                .SetBannerImage(specification.BannerImagePath)
-                .SetBackgroundImage(specification.BackgroundImagePath)
+                .Mapping(p => p.LicenceFile, specification.LicenseFilePath)
+                .Mapping(p => p.ManagedUI.Icon, specification.IconPath)
+                .Mapping(p => p.BannerImage, specification.BannerImagePath)
+                .Mapping(p => p.BackgroundImage, specification.BackgroundImagePath)
                 .SetLocalize(specification.SupportLanguages)
                 .BuildMsi();
         }
 
-        private static ManagedProject SetLicense(this ManagedProject project, string licensePath)
+        private static ManagedProject Mapping(this ManagedProject project, Expression<Func<ManagedProject, string>> selector, string value)
         {
-            if (!string.IsNullOrEmpty(licensePath) && System.IO.File.Exists(licensePath))
+            if (!string.IsNullOrEmpty(value) && System.IO.File.Exists(value))
             {
-                project.LicenceFile = licensePath;
-            }
-
-            return project;
-        }
-
-        private static ManagedProject SetIcon(this ManagedProject project, string iconPath)
-        {
-            if (!string.IsNullOrEmpty(iconPath) && System.IO.File.Exists(iconPath))
-            {
-                project.ManagedUI.Icon = iconPath;
-            }
-
-            return project;
-        }
-
-        private static ManagedProject SetBannerImage(this ManagedProject project, string bannerImagePath)
-        {
-            if (!string.IsNullOrEmpty(bannerImagePath) && System.IO.File.Exists(bannerImagePath))
-            {
-                project.BannerImage = bannerImagePath;
-            }
-
-            return project;
-        }
-
-        private static ManagedProject SetBackgroundImage(this ManagedProject project, string backgroundImagePath)
-        {
-            if (!string.IsNullOrEmpty(backgroundImagePath) && System.IO.File.Exists(backgroundImagePath))
-            {
-                project.BackgroundImage = backgroundImagePath;
+                if (selector.Body is MemberExpression expression)
+                {
+                    // When property
+                    if (expression.Member is PropertyInfo propertyInfo)
+                    {
+                        propertyInfo.SetValue(project, value);
+                    }
+                    // When field
+                    else if (expression.Member is FieldInfo fieldInfo)
+                    {
+                        fieldInfo.SetValue(project, value);
+                    }
+                }
             }
 
             return project;
