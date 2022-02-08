@@ -49,5 +49,16 @@
         }
       ]
     }
+  ],
+  "Shortcuts": [
+    {
+      "FileName": "specification.json",
+      "Items": [
+        {
+          "ShortcutName": "spec.json",
+          "ShortcutPath": "%Desktop%"
+        }
+      ]
+    }
   ]
 }

@@ -49,4 +49,7 @@ public sealed class Specification
 
     [JsonProperty]
     public List<Item> MappingItems { get; set; } = new();
+
+    [JsonProperty]
+    public List<Shortcut> Shortcuts { get; set; } = new();
 }

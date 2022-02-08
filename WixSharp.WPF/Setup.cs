@@ -5,7 +5,6 @@ using System.Linq.Expressions;
 using System.Reflection;
 using WixSharp.Common;
 using WixSharp.Common.Serialization;
-using WixSharp.CommonTasks;
 using WixSharp.UI.Forms;
 
 namespace WixSharp.WPF
@@ -15,12 +14,11 @@ namespace WixSharp.WPF
         public static void Main()
         {
             var specification = JsonSerialization.DeserializeFrom<Specification>("specification.json");
-
             if (specification == null)
                 throw new NullReferenceException("Specification data is null");
 
             var mappingItems = specification.MappingItems
-                .Select(GenerateMappingItem)
+                .Select(GetMappingItem)
                 .OfType<WixObject>()
                 .ToArray();
 
@@ -49,17 +47,8 @@ namespace WixSharp.WPF
                 .Add<ProgressDialog>()
                 .Add<ExitDialog>();
 
+            // if need wxs file
             //project.PreserveTempFiles = true;
-            //project.SourceBaseDir = @"..\..\";
-
-            // Set language
-            /*
-            project.UIInitialized += args =>
-            {
-                var runtime = args.ManagedUI.Shell.MsiRuntime();
-                runtime.UIText.InitFromWxl(args.Session.ReadBinary(cultureId));
-            };
-            */
 
             /*
             project.BeforeInstall += args =>
@@ -87,11 +76,11 @@ namespace WixSharp.WPF
                 .Mapping(p => p.ManagedUI.Icon, specification.IconPath)
                 .Mapping(p => p.BannerImage, specification.BannerImagePath)
                 .Mapping(p => p.BackgroundImage, specification.BackgroundImagePath)
-                .SetLocalize(specification.SupportLanguages)
+                .MappingShortcuts(specification.Shortcuts)
                 .BuildMsi();
         }
 
-        private static Dir GenerateMappingItem(Item item)
+        private static Dir GetMappingItem(Item item)
         {
             var paths = item.Source.Split('/', '\\');
             var filePath = paths.Last();
@@ -110,7 +99,7 @@ namespace WixSharp.WPF
                 childItems.Add(new File(item.Source));
             }
 
-            childItems.AddRange(item.MappingItems.Select(GenerateMappingItem));
+            childItems.AddRange(item.MappingItems.Select(GetMappingItem));
 
             return new Dir(item.Destination, childItems.ToArray());
         }
@@ -118,7 +107,7 @@ namespace WixSharp.WPF
         private static bool Filter(string filename, string excludeType)
         {
             if (string.IsNullOrEmpty(excludeType))
-                return false;
+                return true;
 
             return !excludeType.Split('|').All(filename.EndsWith);
         }
@@ -146,12 +135,16 @@ namespace WixSharp.WPF
             return project;
         }
 
-        private static ManagedProject SetLocalize(this ManagedProject project, IEnumerable<Language> supportedLanguages)
+        private static ManagedProject MappingShortcuts(
+            this ManagedProject project, IEnumerable<Common.Shortcut> shortcuts)
         {
-            foreach (var language in supportedLanguages)
+            foreach (var shortcut in shortcuts)
             {
-                var id = new Id(language.WixId);
-                project.AddBinary(new Binary(id, language.WxlFilePath));
+                var file = project.FindFirstFile(shortcut.FileName);
+
+                file.Shortcuts = shortcut.Items
+                    .Select(item => new FileShortcut(item.ShortcutName, item.ShortcutPath))
+                    .ToArray();
             }
 
             return project;
