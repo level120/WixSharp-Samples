@@ -10,6 +10,9 @@
 - [ ] Apply locals(From [official sample](https://github.com/oleg-shilo/wixsharp/blob/master/Source/src/WixSharp.Samples/Wix%23%20Samples/Managed%20Setup/MultiLanguageUI/setup.cs))
 - [ ] Apply that "Run as Administrator"(From [official sample](https://github.com/oleg-shilo/wixsharp/blob/master/Source/src/WixSharp.Samples/Wix%23%20Samples/RestartElevated(UI)/setup.cs))
 
+- [ ] Language selection dialog
+- [ ] Requirement utilities checking dialog
+
 ### Json Model
 
 * [string] Version

@@ -61,8 +61,12 @@ namespace WixSharp.WPF
             };
             */
 
+            /*
             project.BeforeInstall += args =>
             {
+                if (args.IsInstalling)
+                {
+                }
             };
 
             project.AfterInstall += args =>
@@ -76,6 +80,7 @@ namespace WixSharp.WPF
                     Tasks.StartService(serviceInfo.ServiceName, throwOnError: false);
                 }
             };
+            */
 
             project
                 .Mapping(p => p.LicenceFile, specification.LicenseFilePath)
