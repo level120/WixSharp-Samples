@@ -26,6 +26,7 @@ namespace WixSharp.WPF
             {
                 GUID = specification.GUID,
                 UpgradeCode = specification.GUID,
+                InstallScope = InstallScope.perMachine,
                 ManagedUI = new ManagedUI()
             };
 
