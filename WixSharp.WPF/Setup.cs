@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using WixSharp.Common;
@@ -18,12 +19,19 @@ namespace WixSharp.WPF
             if (specification == null)
                 throw new NullReferenceException("Specification data is null");
 
-            var project = new ManagedProject(name: specification.InstallerName)
+            var mappingItems = specification.MappingItems
+                .Select(GenerateMappingItem)
+                .OfType<WixObject>()
+                .ToArray();
+
+            var project = new ManagedProject(name: specification.InstallerName, items: mappingItems)
             {
                 GUID = specification.GUID,
                 UpgradeCode = specification.GUID,
                 ManagedUI = new ManagedUI()
             };
+
+            project.DefaultRefAssemblies.Add(@"bin\Debug\WixSharp.Common.dll");
 
             project.ManagedUI.InstallDialogs
                 .Add<WelcomeDialog>()
@@ -43,6 +51,8 @@ namespace WixSharp.WPF
             //project.PreserveTempFiles = true;
             //project.SourceBaseDir = @"..\..\";
 
+            // todo: Exception 발생 이유 확인
+            /*
             project.BeforeInstall += args =>
             {
                 if (specification.UseService)
@@ -54,6 +64,7 @@ namespace WixSharp.WPF
                 if (specification.UseService)
                     Tasks.StartService(specification.ServiceName, throwOnError: false);
             };
+            */
 
             project
                 .Mapping(p => p.LicenceFile, specification.LicenseFilePath)
@@ -64,7 +75,40 @@ namespace WixSharp.WPF
                 .BuildMsi();
         }
 
-        private static ManagedProject Mapping(this ManagedProject project, Expression<Func<ManagedProject, string>> selector, string value)
+        private static Dir GenerateMappingItem(Item item)
+        {
+            var paths = item.Source.Split('/', '\\');
+            var filePath = paths.Last();
+            var containsMasking = filePath.Contains("*");
+
+            var childItems = new List<WixEntity>();
+
+            if (containsMasking)
+            {
+                childItems.Add(new Files(
+                    item.Source,
+                    filename => Filter(filename, item.ExcludeType)));
+            }
+            else
+            {
+                childItems.Add(new File(item.Source));
+            }
+
+            childItems.AddRange(item.MappingItems.Select(GenerateMappingItem));
+
+            return new Dir(item.Destination, childItems.ToArray());
+        }
+
+        private static bool Filter(string filename, string excludeType)
+        {
+            if (string.IsNullOrEmpty(excludeType))
+                return false;
+
+            return !excludeType.Split('|').All(filename.EndsWith);
+        }
+
+        private static ManagedProject Mapping(
+            this ManagedProject project, Expression<Func<ManagedProject, string>> selector, string value)
         {
             if (!string.IsNullOrEmpty(value) && System.IO.File.Exists(value))
             {

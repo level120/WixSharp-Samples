@@ -23,5 +23,26 @@
       "DisplayName": "Japan",
       "WxlFilePath": "../Localizations/WixUI_ja-jp.wxl"
     }
+  ],
+  "MappingItems": [
+    {
+      "Source": "specification.json",
+      "Destination": "%ProgramFiles%/WixSharp-Sample",
+      "MappingItems": [
+        {
+          "Source": "../Localizations/*.*",
+          "Destination": "Localizations"
+        },
+        {
+          "Source": "../License/*.*",
+          "Destination": "License"
+        },
+        {
+          "Source": "../*.*",
+          "Destination": "Common",
+          "ExcludeType": ".gitignore"
+        }
+      ]
+    }
   ]
 }

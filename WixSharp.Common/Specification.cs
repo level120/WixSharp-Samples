@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Newtonsoft.Json;
 
 namespace WixSharp.Common;
@@ -53,9 +52,4 @@ public sealed class Specification
 
     [JsonProperty]
     public List<Item> MappingItems { get; set; } = new();
-
-    [JsonIgnore]
-    public IReadOnlyDictionary<string, Item[]> MappingItemDictionary => MappingItems
-        .GroupBy(item => item.Destination)
-        .ToDictionary(item => item.Key, grouping => grouping.ToArray());
 }
