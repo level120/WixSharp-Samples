@@ -20,10 +20,7 @@ public sealed class Specification
     public string? Manufacturer { get; set; }
 
     [JsonProperty]
-    public string? ServiceName { get; set; }
-
-    [JsonProperty]
-    public bool UseService { get; set; }
+    public Service? WindowsService { get; set; }
 
     /// <example>../doc/license.rtf</example>
     [JsonProperty]

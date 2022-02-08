@@ -3,10 +3,15 @@
   "GUID": "38FAECC0-D6EF-496E-B551-A21DD7DCDCC3",
   "Manufacturer": "My Company",
   "InstallerName": "WixSharp",
-  "ServiceName": "WixSharp",
   "LicenseFilePath": "../License/ja-jp.rtf",
   "UseService": true,
   "UseRunningAsAdministrator": true,
+  "WindowsService": {
+    "ServiceName": "WixSharp Service",
+    "ServiceFile": "Some.exe",
+    "IsInstalling": true,
+    "ServiceArguments": null
+  },
   "SupportLanguages": [
     {
       "Id": "ko-KR",

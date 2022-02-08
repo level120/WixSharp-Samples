@@ -31,6 +31,7 @@ namespace WixSharp.WPF
                 ManagedUI = new ManagedUI()
             };
 
+            // Use external library
             project.DefaultRefAssemblies.Add(@"bin\Debug\WixSharp.Common.dll");
 
             project.ManagedUI.InstallDialogs
@@ -51,20 +52,30 @@ namespace WixSharp.WPF
             //project.PreserveTempFiles = true;
             //project.SourceBaseDir = @"..\..\";
 
-            // todo: Exception 발생 이유 확인
+            // Set language
             /*
+            project.UIInitialized += args =>
+            {
+                var runtime = args.ManagedUI.Shell.MsiRuntime();
+                runtime.UIText.InitFromWxl(args.Session.ReadBinary(cultureId));
+            };
+            */
+
             project.BeforeInstall += args =>
             {
-                if (specification.UseService)
-                    Tasks.StopService(specification.ServiceName, throwOnError: false);
             };
 
             project.AfterInstall += args =>
             {
-                if (specification.UseService)
-                    Tasks.StartService(specification.ServiceName, throwOnError: false);
+                if (specification.WindowsService != null)
+                {
+                    var serviceInfo = specification.WindowsService;
+                    var serviceFilePath = System.IO.Path.Combine(args.InstallDir, serviceInfo.ServiceFile);
+
+                    Tasks.InstallService(serviceFilePath, serviceInfo.IsInstalling, serviceInfo.ServiceArguments);
+                    Tasks.StartService(serviceInfo.ServiceName, throwOnError: false);
+                }
             };
-            */
 
             project
                 .Mapping(p => p.LicenceFile, specification.LicenseFilePath)
@@ -134,15 +145,9 @@ namespace WixSharp.WPF
         {
             foreach (var language in supportedLanguages)
             {
-                project.AddBinary(new Binary(new Id(language.WixId), language.WxlFilePath));
+                var id = new Id(language.WixId);
+                project.AddBinary(new Binary(id, language.WxlFilePath));
             }
-
-            // todo: test 코드 제거
-            // project.UIInitialized += args =>
-            // {
-            //     var runtime = args.ManagedUI.Shell.MsiRuntime();
-            //     runtime.UIText.InitFromWxl(args.Session.ReadBinary("ko_kr"));
-            // };
 
             return project;
         }
