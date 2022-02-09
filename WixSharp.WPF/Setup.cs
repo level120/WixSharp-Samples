@@ -145,7 +145,9 @@ namespace WixSharp.WPF
         {
             foreach (var shortcut in shortcuts)
             {
-                var file = project.FindFirstFile(shortcut.FileName);
+                var file = project
+                    .ResolveWildCards(ignoreEmptyDirectories: true)
+                    .FindFirstFile(shortcut.FileName);
 
                 if (file != null)
                 {
