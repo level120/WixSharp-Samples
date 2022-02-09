@@ -1,4 +1,5 @@
 ﻿using System;
+using WixSharp.CommonTasks;
 
 namespace WixSharp.Bootstrapper
 {
@@ -13,39 +14,33 @@ namespace WixSharp.Bootstrapper
 
             productProj.InstallScope = InstallScope.perMachine;
             productProj.GUID = new Guid("6f330b47-2577-43ad-9095-1861bb258777");
+            productProj.Language = EntryBootstrapperApplication.Languages;
 
-            string productMsi = productProj.BuildMsi("ya.msi");
+            productProj.OutFileName = $"{productProj.Name}.ml.v{productProj.Version}";
+
+            var msiFile = productProj.BuildMultilanguageMsi();
 
             //------------------------------------
 
             var bootstrapper =
                 new Bundle("My Product",
                            new PackageGroupRef("NetFx40Web"),
-                           new MsiPackage(productMsi)
+                           new MsiPackage(msiFile)
                            {
-                               Id = "MyProductPackageId",
+                               Id = EntryBootstrapperApplication.MainPackageId,
                                DisplayInternalUI = true,
-                               MsiProperties = "USERINPUT=[UserInput]"
+                               Visible = true,
+                               MsiProperties = "TRANSFORMS=[TRANSFORMS]"
                            });
 
-            bootstrapper.Variables = new[] { new Variable("UserInput", "<none>"), };
-            bootstrapper.Version = new Version("1.0.0.0");
+            bootstrapper.SetVersionFromFile(msiFile);
             bootstrapper.UpgradeCode = new Guid("6f330b47-2577-43ad-9095-1861bb25889a");
-
-            // You can also use System.Reflection.Assembly.GetExecutingAssembly().Location instead of "%this%"
-            // Note, passing BootstrapperCore.config is optional and if not provided the default BootstrapperCore.config
-            // will be used. The content of the default BootstrapperCore.config can be accessed via
-            // ManagedBootstrapperApplication.DefaultBootstrapperCoreConfigContent.
-            //
-            // Note that the DefaultBootstrapperCoreConfigContent may not be suitable for all build and runtime scenarios.
-            // In such cases you may need to use custom BootstrapperCore.config as demonstrated below.
             bootstrapper.Application = new ManagedBootstrapperApplication("%this%", "BootstrapperCore.config");
 
             //bootstrapper.PreserveTempFiles = true;
             bootstrapper.SuppressWixMbaPrereqVars = true;
 
-            bootstrapper.Build("my_app.exe");
-            System.IO.File.Delete(productMsi);
+            bootstrapper.Build(msiFile.PathChangeExtension(".exe"));
         }
     }
 }

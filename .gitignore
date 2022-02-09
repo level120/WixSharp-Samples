@@ -567,5 +567,7 @@ FodyWeavers.xsd
 # Wix
 *.wxs
 *.msi
+*.mst
 *.wixpdb
 *.wixobj
+WixSharp.*/*.exe

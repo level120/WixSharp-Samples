@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using Microsoft.Tools.WindowsInstallerXml.Bootstrapper;
@@ -8,9 +9,9 @@ namespace WixSharp.Bootstrapper
     public class MainWindowViewModel : INotifyPropertyChanged
     {
         private bool _installEnabled;
-        private string _userInput = "User input content...";
         private bool _uninstallEnabled;
         private bool _isThinking;
+        private CultureInfo _selectedLanguage;
 
         public bool InstallEnabled
         {
@@ -18,16 +19,6 @@ namespace WixSharp.Bootstrapper
             set
             {
                 _installEnabled = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public string UserInput
-        {
-            get => _userInput;
-            set
-            {
-                _userInput = value;
                 OnPropertyChanged();
             }
         }
@@ -52,10 +43,28 @@ namespace WixSharp.Bootstrapper
             }
         }
 
-        public BootstrapperApplication Bootstrapper { get; set; }
-
-        public MainWindowViewModel(BootstrapperApplication bootstrapper)
+        public CultureInfo SelectedLanguage
         {
+            get => _selectedLanguage;
+            set
+            {
+                _selectedLanguage = value;
+
+                if (Bootstrapper != null)
+                    Bootstrapper.SelectedLanguage = value;
+
+                OnPropertyChanged();
+            }
+        }
+
+        public CultureInfo[] SupportedLanguages { get; }
+        public EntryBootstrapperApplication Bootstrapper { get; set; }
+
+        public MainWindowViewModel(EntryBootstrapperApplication bootstrapper)
+        {
+            SelectedLanguage = bootstrapper.SelectedLanguage;
+            SupportedLanguages = bootstrapper.SupportedLanguages;
+
             IsBusy = false;
 
             Bootstrapper = bootstrapper;
@@ -71,7 +80,6 @@ namespace WixSharp.Bootstrapper
         {
             IsBusy = true;
 
-            Bootstrapper.Engine.StringVariables["UserInput"] = UserInput;
             Bootstrapper.Engine.Plan(LaunchAction.Install);
         }
 

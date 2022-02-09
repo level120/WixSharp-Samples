@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using Microsoft.Tools.WindowsInstallerXml.Bootstrapper;
 
 namespace WixSharp.Bootstrapper
 {
@@ -10,7 +9,7 @@ namespace WixSharp.Bootstrapper
     {
         private readonly MainWindowViewModel _viewModel;
 
-        public MainWindow(BootstrapperApplication bootstrapper)
+        public MainWindow(EntryBootstrapperApplication bootstrapper)
         {
             InitializeComponent();
 
