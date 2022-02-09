@@ -7,10 +7,10 @@ namespace WixSharp.Common;
 public sealed class Item
 {
     [JsonRequired, JsonProperty]
-    public string Source { get; set; } = string.Empty;
+    public string? Destination { get; set; } = string.Empty;
 
-    [JsonRequired, JsonProperty]
-    public string? Destination { get; set; }
+    [JsonProperty]
+    public string? Source { get; set; }
 
     [JsonProperty]
     public string? ExcludeType { get; set; }

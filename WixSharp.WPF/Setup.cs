@@ -83,21 +83,24 @@ namespace WixSharp.WPF
 
         private static Dir GetMappingItem(Item item)
         {
-            var paths = item.Source.Split('/', '\\');
-            var filePath = paths.Last();
-            var containsMasking = filePath.Contains("*");
-
             var childItems = new List<WixEntity>();
 
-            if (containsMasking)
+            if (!string.IsNullOrEmpty(item.Source))
             {
-                childItems.Add(new Files(
-                    item.Source,
-                    filename => Filter(filename, item.ExcludeType)));
-            }
-            else
-            {
-                childItems.Add(new File(item.Source));
+                var paths = item.Source.Split('/', '\\');
+                var filePath = paths.Last();
+                var containsMasking = filePath.Contains("*");
+
+                if (containsMasking)
+                {
+                    childItems.Add(new Files(
+                        item.Source,
+                        filename => Filter(filename, item.ExcludeType)));
+                }
+                else
+                {
+                    childItems.Add(new File(item.Source));
+                }
             }
 
             childItems.AddRange(item.MappingItems.Select(GetMappingItem));
@@ -143,9 +146,12 @@ namespace WixSharp.WPF
             {
                 var file = project.FindFirstFile(shortcut.FileName);
 
-                file.Shortcuts = shortcut.Items
-                    .Select(item => new FileShortcut(item.ShortcutName, item.ShortcutPath))
-                    .ToArray();
+                if (file != null)
+                {
+                    file.Shortcuts = shortcut.Items
+                        .Select(item => new FileShortcut(item.ShortcutName, item.ShortcutPath))
+                        .ToArray();
+                }
             }
 
             return project;

@@ -15,24 +15,20 @@
   "SupportLanguages": [
     {
       "Id": "ko-KR",
-      "DisplayName": "Korean",
       "WxlFilePath": "../Localizations/WixUI_ko-KR.wxl"
     },
     {
       "Id": "en-US",
-      "DisplayName": "English",
       "WxlFilePath": "../Localizations/WixUI_en-us.wxl"
     },
     {
       "Id": "ja-JP",
-      "DisplayName": "Japan",
       "WxlFilePath": "../Localizations/WixUI_ja-jp.wxl"
     }
   ],
   "MappingItems": [
     {
       "Destination": "%ProgramFiles%/WixSharp-Sample",
-      "Source": "specification.json",
       "MappingItems": [
         {
           "Destination": "Localizations",
