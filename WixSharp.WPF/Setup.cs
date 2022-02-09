@@ -149,12 +149,9 @@ namespace WixSharp.WPF
                     .ResolveWildCards(ignoreEmptyDirectories: true)
                     .FindFirstFile(shortcut.FileName);
 
-                if (file != null)
-                {
-                    file.Shortcuts = shortcut.Items
-                        .Select(item => new FileShortcut(item.ShortcutName, item.ShortcutPath))
-                        .ToArray();
-                }
+                file.Shortcuts = shortcut.Items
+                    .Select(item => new FileShortcut(new Id(shortcut.FileName), item.ShortcutName, item.ShortcutPath))
+                    .ToArray();
             }
 
             return project;
