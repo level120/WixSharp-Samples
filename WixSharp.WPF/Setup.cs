@@ -73,6 +73,7 @@ namespace WixSharp.WPF
             */
 
             project
+                .Mapping(p => p.ControlPanelInfo.Manufacturer, specification.Manufacturer)
                 .Mapping(p => p.LicenceFile, specification.LicenseFilePath)
                 .Mapping(p => p.ManagedUI.Icon, specification.IconPath)
                 .Mapping(p => p.BannerImage, specification.BannerImagePath)
@@ -113,7 +114,7 @@ namespace WixSharp.WPF
             if (string.IsNullOrEmpty(excludeType))
                 return true;
 
-            return !excludeType.Split('|').All(filename.EndsWith);
+            return !excludeType.Split('|').Any(filename.EndsWith);
         }
 
         private static ManagedProject Mapping(
